@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "register_table")
@@ -27,11 +25,21 @@ public class RegisterationEntity {
 	@Column(name = "phone_no")
 	private String phoneNo;
 	@Column(name = "email")
-	@Email
 	private String email;
 	@Column(name = "zip")
 	private String zip;
+	@Column (name="reg_password")
+	private String password;
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
 	public int getId() {
 		return id;
 	}

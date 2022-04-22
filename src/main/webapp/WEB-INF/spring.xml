@@ -14,12 +14,28 @@
 		<property name="prefix" value="" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="poojasp2394@gmail.com" />
+		<property name="password" value="pooja@13mithun" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
 	<!-- Create Data Source -->
 	<bean
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		name="ds">
 		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver" />
+			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/db_demo" />
 		<property name="username" value="root" />
