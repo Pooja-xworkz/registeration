@@ -1,12 +1,12 @@
 package com.xworkz.register.service;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -69,9 +69,10 @@ public class RegisterationServiveImpl implements RegisterationService {
 						String encodeString = encoder.encodeToString(pwd.getBytes());
 						System.out.println("Encripted value " + " " + encodeString);
 						regentity.setPassword(encodeString);
-						String password=regentity.getPassword();
+						
+						String otp=genarateRandomOTP();
 						regDao.register(regentity);
-						sendEmail(email, password);
+						sendEmail(email, otp);
 						
 					}
 
@@ -130,6 +131,28 @@ public class RegisterationServiveImpl implements RegisterationService {
 		
 		
 	}
+	
+	@Override
+	public boolean generateOTP() {
+		logger.info("invoked generateOTP in service...");
+
+		try {
+			String onetimepass = genarateRandomOTP();
+			String temporaryPass = onetimepass;
+			if (Objects.nonNull(onetimepass)) {
+				logger.info("onetimepass generated in service...");
+			}else {
+				
+			}
+
+			
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		return false;
+	}
+
+			
 
 	
 
@@ -148,18 +171,24 @@ public class RegisterationServiveImpl implements RegisterationService {
 
 
 	@Override
-	public String sendEmail(String email,String password) {
+	public String sendEmail(String email,String otp) {
 		
 		
 		SimpleMailMessage email1=new SimpleMailMessage();
 		email1.setFrom("poojasp2394@gmail.com");
 		email1.setTo(email);
 		email1.setSubject("ghggki");
-		email1.setText(password);
+		email1.setText(otp);
 		mailSender.send(email1);
-		return password;
+		return otp;
 				
 		
+	}
+	
+	@Override
+	public String genarateRandomOTP() {
+		String newRandomPassword = RandomStringUtils.randomNumeric(6);
+		return newRandomPassword;
 	}
 
 }
