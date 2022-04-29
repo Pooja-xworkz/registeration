@@ -8,7 +8,7 @@ public interface RegisterationService {
 	public String validateAndSave(RegisterationEntity regentity);
 public String sendEmail(String email ,String password);
 	public String generateRandomPassword(int len);
-	public boolean generateOTP();
-	public String genarateRandomOTP() ;
+
+	
 
 }
