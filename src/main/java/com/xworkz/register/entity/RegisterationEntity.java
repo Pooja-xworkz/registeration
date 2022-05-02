@@ -30,6 +30,18 @@ public class RegisterationEntity {
 	private String zip;
 	@Column (name="reg_password")
 	private String password;
+	@Column(name="otp")
+	private String otp;
+
+	
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
 
 	public String getPassword() {
 		return password;

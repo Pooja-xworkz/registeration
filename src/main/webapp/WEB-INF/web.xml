@@ -7,7 +7,7 @@
 	<welcome-file-list>
 
 		<welcome-file>index.htm</welcome-file>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>logo.jsp</welcome-file>
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>

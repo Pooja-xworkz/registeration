@@ -1,12 +1,12 @@
 package com.xworkz.register.service;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -69,9 +69,12 @@ public class RegisterationServiveImpl implements RegisterationService {
 						String encodeString = encoder.encodeToString(pwd.getBytes());
 						System.out.println("Encripted value " + " " + encodeString);
 						regentity.setPassword(encodeString);
-						String password=regentity.getPassword();
-						regDao.register(regentity);
-						sendEmail(email, password);
+						
+						String otp=generateOTP();
+						regentity.setOtp(otp);;
+						String otp1=regentity.getOtp();
+						//regDao.register(regentity);
+						sendEmail(email, otp1);
 						
 					}
 
@@ -130,7 +133,6 @@ public class RegisterationServiveImpl implements RegisterationService {
 		
 		
 	}
-
 	
 
 	@Override
@@ -148,18 +150,28 @@ public class RegisterationServiveImpl implements RegisterationService {
 
 
 	@Override
-	public String sendEmail(String email,String password) {
+	public String sendEmail(String email,String otp) {
 		
 		
 		SimpleMailMessage email1=new SimpleMailMessage();
 		email1.setFrom("poojasp2394@gmail.com");
 		email1.setTo(email);
 		email1.setSubject("ghggki");
-		email1.setText(password);
+		email1.setText(otp);
 		mailSender.send(email1);
-		return password;
+		return otp;
 				
 		
 	}
+	
+	@Override
+	 public  String generateOTP() 
+    {  //int randomPin declared to store the otp
+        //since we using Math.random() hence we have to type cast it int
+        //because Math.random() returns decimal value
+        int randomPin   =(int) (Math.random()*9000)+1000;
+        String otp  = String.valueOf(randomPin);
+        return otp; //returning value of otp
+    }
 
 }
