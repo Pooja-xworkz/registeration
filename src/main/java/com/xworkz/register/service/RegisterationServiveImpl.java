@@ -68,13 +68,13 @@ public class RegisterationServiveImpl implements RegisterationService {
 						String pwd = generateRandomPassword(8);
 						String encodeString = encoder.encodeToString(pwd.getBytes());
 						System.out.println("Encripted value " + " " + encodeString);
-						regentity.setPassword(encodeString);
-						
-						String otp=generateOTP();
-						regentity.setOtp(otp);;
-						String otp1=regentity.getOtp();
-						//regDao.register(regentity);
-						sendEmail(email, otp1);
+						/*
+						 * regentity.setPassword(encodeString);
+						 * 
+						 * String otp=generateOTP(); regentity.setOtp(otp);; String
+						 * otp1=regentity.getOtp(); //regDao.register(regentity); sendEmail(email,
+						 * otp1);
+						 */
 						
 					}
 
@@ -149,29 +149,22 @@ public class RegisterationServiveImpl implements RegisterationService {
 
 
 
-	@Override
-	public String sendEmail(String email,String otp) {
-		
-		
-		SimpleMailMessage email1=new SimpleMailMessage();
-		email1.setFrom("poojasp2394@gmail.com");
-		email1.setTo(email);
-		email1.setSubject("ghggki");
-		email1.setText(otp);
-		mailSender.send(email1);
-		return otp;
-				
-		
-	}
-	
-	@Override
-	 public  String generateOTP() 
-    {  //int randomPin declared to store the otp
-        //since we using Math.random() hence we have to type cast it int
-        //because Math.random() returns decimal value
-        int randomPin   =(int) (Math.random()*9000)+1000;
-        String otp  = String.valueOf(randomPin);
-        return otp; //returning value of otp
-    }
-
+	/*
+	 * @Override public String sendEmail(String email,String otp) {
+	 * 
+	 * 
+	 * SimpleMailMessage email1=new SimpleMailMessage();
+	 * email1.setFrom("poojasp2394@gmail.com"); email1.setTo(email);
+	 * email1.setSubject("ghggki"); email1.setText(otp); mailSender.send(email1);
+	 * return otp;
+	 * 
+	 * 
+	 * }
+	 * 
+	 * @Override public String generateOTP() { //int randomPin declared to store the
+	 * otp //since we using Math.random() hence we have to type cast it int
+	 * //because Math.random() returns decimal value int randomPin =(int)
+	 * (Math.random()*9000)+1000; String otp = String.valueOf(randomPin); return
+	 * otp; //returning value of otp }
+	 */
 }

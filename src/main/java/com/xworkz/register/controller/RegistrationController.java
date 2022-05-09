@@ -35,10 +35,10 @@ public class RegistrationController {
 	
 		ModelAndView mav = new ModelAndView();
 		if(!StringUtils.isEmpty(entity.getEmail())) {
-			mav=new ModelAndView("success");
+			mav=new ModelAndView("logo");
 		String valid=service.validateAndSave(entity);
 		if(valid==null) {
-		model.addAttribute("success", "Registered Successfully " + entity.getName());
+		model.addAttribute("msg", "Registered Successfully " + entity.getName());
 		return mav;
 		}else {
 			mav=new ModelAndView("register");

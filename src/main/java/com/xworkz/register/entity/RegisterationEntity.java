@@ -5,7 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+@NamedQueries({ @NamedQuery(name = "findByEmail", query = "from RegisterationEntity e where e.email = :email"),
+		@NamedQuery(name = "updateByEmail", query = "update RegisterationEntity  e set e.otp = :otp where e.email = :email"),
+		@NamedQuery(name = "updateAllDataByEmail",query="update RegisterationEntity e set e.name=:name, e.surName=:surName,e.address=:address,e.phoneNo=:phoneNo,e.zip=:zip,e.dateOfBirth=:dateOfBirth where e.email = :email"),
+		@NamedQuery(name = "findByName", query = "from RegisterationEntity e where e.name like :name")})
+
 
 @Entity
 @Table(name = "register_table")
@@ -28,12 +36,10 @@ public class RegisterationEntity {
 	private String email;
 	@Column(name = "zip")
 	private String zip;
-	@Column (name="reg_password")
+	@Column(name = "reg_password")
 	private String password;
-	@Column(name="otp")
+	@Column(name = "otp")
 	private String otp;
-
-	
 
 	public String getOtp() {
 		return otp;
@@ -51,7 +57,6 @@ public class RegisterationEntity {
 		this.password = password;
 	}
 
-	
 	public int getId() {
 		return id;
 	}
